@@ -1,8 +1,7 @@
 import styled from "styled-components";
-
-import Snowfall from "react-snowfall";
-
 import Image from "next/image";
+
+import { Info } from "../details/info";
 
 const Container = styled.div`
   display: flex;
@@ -152,6 +151,7 @@ const InlineDate = styled.div`
 
 const Month = styled.p`
   font-size: 18px;
+  text-transform: uppercase;
 `;
 
 const Date = styled.h1`
@@ -160,13 +160,30 @@ const Date = styled.h1`
   text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.1);
 `;
 
-const DayTime = styled.p`
-  font-size: 12px;
+const Day = styled.p`
   padding: 2px 10px;
+  width: 70px;
+
   border-top: 1px solid;
   border-bottom: 1px solid;
 
-  letter-spacing: 1px;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+
+  letter-spacing: 2px;
+`;
+
+const Time = styled.p`
+  padding: 2px 10px;
+  width: 70px;
+
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
 `;
 
 const Year = styled.p`
@@ -176,19 +193,10 @@ const Year = styled.p`
 const Hero = () => {
   return (
     <Container>
-      <Snowfall
-        color="#F2F5F3"
-        style={{
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          zIndex: "1",
-        }}
-      />
       <Wrapper>
         <BG>
           <Image
-            src={require("/src/img/3.jpg")}
+            src={require("/src/img/background.jpg")}
             layout="fill"
             objectFit="cover"
             alt="Floral Background"
@@ -196,7 +204,7 @@ const Hero = () => {
         </BG>
         <BGRotate>
           <Image
-            src={require("/src/img/3 copy.jpg")}
+            src={require("/src/img/backgroundRotated.jpg")}
             layout="fill"
             objectFit="cover"
             alt="Floral Background"
@@ -204,23 +212,23 @@ const Hero = () => {
         </BGRotate>
         <TextWrapper>
           <Title>
-            Jemputan Ke
+            Jemputan
             <br />
-            Majlis Perkahwinan
+            {Info.Title}
           </Title>
           <Border>
-            <Anis>Anis</Anis>
+            <Anis>{Info.SN.Main}</Anis>
             <And>Dan</And>
-            <Hasrul>Hasrul</Hasrul>
+            <Hasrul>{Info.SN.Partner}</Hasrul>
           </Border>
           <DateWrapper>
-            <Month>MEI</Month>
+            <Month>{Info.Date.Month}</Month>
             <InlineDate>
-              <DayTime>AHAD</DayTime>
-              <Date>22</Date>
-              <DayTime>12 P.M</DayTime>
+              <Day>{Info.Date.Day}</Day>
+              <Date>{Info.Date.Date}</Date>
+              <Time>{Info.Date.Time}</Time>
             </InlineDate>
-            <Year>2022</Year>
+            <Year>{Info.Date.Year}</Year>
           </DateWrapper>
         </TextWrapper>
       </Wrapper>

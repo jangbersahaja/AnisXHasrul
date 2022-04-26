@@ -1,11 +1,12 @@
 import { useState } from "react";
-
 import styled from "styled-components";
-
 import Image from "next/image";
 
 import { BsPinMapFill, BsTelephone, BsWhatsapp } from "react-icons/bs";
 import { SiWaze, SiGooglemaps } from "react-icons/si";
+import { MdClose } from "react-icons/md";
+
+import { Info } from "../details/info";
 
 const Container = styled.div`
   display: flex;
@@ -16,11 +17,12 @@ const Container = styled.div`
   opacity: ${(props) => props.opacity};
   transition: all ease-in-out 300ms;
 
+  height: 100%;
+  width: 100%;
+
   position: fixed;
   top: 0;
-
-  width: 100%;
-  height: 100%;
+  left: 0;
 
   z-index: 1;
 `;
@@ -66,13 +68,15 @@ const Drive = styled.div`
 
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  overflow: hidden;
 
   gap: 20px;
   max-width: 600px;
   width: 90%;
 
   position: absolute;
-  top: ${(props) => props.display};
+  bottom: ${(props) => props.display};
 
   transition: all ease-in-out 500ms;
 `;
@@ -119,6 +123,7 @@ const Contact = styled.div`
 
   background: linear-gradient(90deg, #9dbaa1, #69976b, #69976b, #9dbaa1);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
 
   padding: 20px 40px;
   gap: 20px;
@@ -126,7 +131,7 @@ const Contact = styled.div`
   width: 90%;
 
   position: absolute;
-  top: ${(props) => props.display};
+  bottom: ${(props) => props.display};
 
   transition: all ease-in-out 500ms;
 `;
@@ -157,6 +162,11 @@ const Link = styled.a`
   color: white;
 `;
 
+const CloseIcon = styled(MdClose)`
+  color: #fff;
+  font-size: 25px;
+`;
+
 const Nav = () => {
   const [openLocation, setOpenLocation] = useState(false);
   const [openContact, setOpenContact] = useState(false);
@@ -175,73 +185,72 @@ const Nav = () => {
     }
   };
 
+  const ContactMe = Info.Contact;
+
   return (
     <>
       <Wrapper>
         <Box onClick={setContact}>
-          <BsTelephone />
-          <Title>Hubungi</Title>
+          {openContact === true ? (
+            <CloseIcon />
+          ) : (
+            <>
+              <BsTelephone />
+              <Title>Hubungi</Title>
+            </>
+          )}
         </Box>
-        <Contact display={openContact === false ? "150px" : "-150px"}>
-          <Application>
-            <Title>Encik Awie (Bapa)</Title>
-            <ContactApp>
-              <Link
-                href="http://wasap.my/+60193800254/Majlis+Perkahwinan+Anis+&+Hasrul"
-                target="_blank"
-              >
-                <Whatsapp />
-              </Link>
-              <Link href="tel:0193800253">
-                <Telephone />
-              </Link>
-            </ContactApp>
-          </Application>
-          <Application>
-            <Title>Puan Zarina (Ibu) </Title>
-            <ContactApp>
-              <Link
-                href="http://wasap.my/+60123090254/Majlis+Perkahwinan+Anis+&+Hasrul"
-                target="_blank"
-              >
-                <Whatsapp />
-              </Link>
-              <Link href="tel:0123090253">
-                <Telephone />
-              </Link>
-            </ContactApp>
-          </Application>
+        <Contact display={openContact === false ? "-200px" : "100px"}>
+          {ContactMe.map((person, i) => (
+            <Application key={i}>
+              <Title>{person.Name}</Title>
+              <ContactApp>
+                <Link
+                  href={`http://wasap.my/+6${person.Phone}/Majlis+Perkahwinan+Anis+&+Hasrul`}
+                  target="_blank"
+                >
+                  <Whatsapp />
+                </Link>
+                <Link href={`tel:${person.Phone}`}>
+                  <Telephone />
+                </Link>
+              </ContactApp>
+            </Application>
+          ))}
         </Contact>
         <Box onClick={setLocation}>
-          <BsPinMapFill />
-          <Title>Lokasi</Title>
+          {openLocation === true ? (
+            <CloseIcon />
+          ) : (
+            <>
+              <BsPinMapFill />
+              <Title>Lokasi</Title>
+            </>
+          )}
         </Box>
-        <Drive display={openLocation === false ? "400px" : "-400px"}>
+        <Drive display={openLocation === false ? "-400px" : "100px"}>
           <Map>
             <Image
-              src={require("/src/img/Screenshot 2022-04-22 at 20.20.08.png")}
+              src={require("/src/img/map.png")}
               layout="fill"
               objectFit="cover"
               alt="Gambar Profil Reezal Merican"
             />
           </Map>
-          <Venue>Zemi Garden Wedding</Venue>
+          <Venue>{Info.Location.Venue}</Venue>
           <Address>
-            Lot 11909, Jalan Rasah, Taman Tuan Sheikh, 70300 Seremban, Negeri
-            Sembilan
+            {Info.Location.Address1}
+            <br />
+            {Info.Location.Address2}
           </Address>
           <Application>
-            <Box as="a" href="https://waze.com/ul/hw22rrehw7" target="_blank">
+            <Box as="a" href={Info.Location.Waze} target="_blank">
               <SiWaze />
-              <Title> Waze</Title>
+              <Title>Waze</Title>
             </Box>
-            <Box
-              as="a"
-              href="https://goo.gl/maps/xQZUqEbdHsVzsz8t8"
-              target="_blank"
-            >
+            <Box as="a" href={Info.Location.Google} target="_blank">
               <SiGooglemaps />
-              <Title> Google Map </Title>
+              <Title>Google Map </Title>
             </Box>
           </Application>
         </Drive>
