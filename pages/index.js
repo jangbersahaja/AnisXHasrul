@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Head from "next/head";
 
-import CountDown from "../components/CountDown";
 import Details from "../components/Details";
 import Hero from "../components/Hero";
 import Nav from "../components/Nav";
@@ -10,6 +9,8 @@ import Intro from "../components/Intro";
 
 import Snowfall from "react-snowfall";
 import { Info } from "../details/info";
+import Main from "../components/Main";
+import Collage from "../components/Collage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -146,7 +147,7 @@ export default function Home() {
             <>
               <audio src="/bgm.mp3" autoPlay></audio>
               <Snowfall
-                color="#F2F5F3"
+                color="#DDDDCE"
                 style={{
                   position: "fixed",
                   width: "100vw",
@@ -159,8 +160,9 @@ export default function Home() {
             ""
           )}
           <Hero />
-          <CountDown />
+          <Main />
           <Details />
+          <Collage />
         </Back>
         <Bottom display={open === true ? "flex" : "none"}>
           <Nav />

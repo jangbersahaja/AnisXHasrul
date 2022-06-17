@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   justify-content: center;
 
   gap: 30px;
-  padding: 100px 10px;
+  padding: 50px 10px;
 `;
 
 const BG = styled.div`
@@ -67,56 +67,6 @@ const Big = styled.p`
 const OurName = styled.p`
   font-size: 22px;
   font-weight: 500;
-`;
-
-const Disclosure = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 90%;
-  max-width: 600px;
-
-  margin: 30px 0;
-
-  border-radius: 10px;
-  border: 1px solid;
-  overflow: hidden;
-`;
-
-const DisBot = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-  padding: 20px;
-
-  background-color: whitesmoke;
-`;
-
-const DisTitle = styled.h1`
-  background-color: #000;
-  font-size: 20px;
-
-  text-align: center;
-
-  color: #fff;
-
-  padding: 10px 20px;
-`;
-
-const DisText = styled.p`
-  font-size: 16px;
-`;
-
-const DisList = styled.ol`
-  font-size: 16px;
-`;
-const DisListItem = styled.li`
-  font-size: 16px;
-`;
-
-const DisListUndeline = styled.u`
-  font-size: 16px;
 `;
 
 const Details = () => {
@@ -198,24 +148,6 @@ const Details = () => {
             {Info.Extra.Line2}
           </Text>
         </Detail>
-        <Disclosure>
-          <DisTitle>Peringatan</DisTitle>
-          <DisBot>
-            <DisText>
-              Majlis ini terhad kepada individu yang telah
-              <DisListUndeline>
-                {" "}
-                mendapat vaksin yang lengkap dan matang.
-              </DisListUndeline>{" "}
-              Mohon para tetamu untuk sentiasa mematuhi SOP norma baharu.
-            </DisText>
-            <DisList>
-              <DisListItem>Peka terhadap penjarakan fizikal.</DisListItem>
-              <DisListItem>Sentiasa memakai pelitup muka.</DisListItem>
-              <DisListItem>Menggunakan hand-sanitizer</DisListItem>
-            </DisList>
-          </DisBot>
-        </Disclosure>
       </Wrapper>
     </Container>
   );
