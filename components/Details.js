@@ -108,9 +108,7 @@ const Details = () => {
           </Text>
         </Detail>
         <Detail>
-          <Text>
-            ke {Info.Title} {Info.Parent.Relation} kami
-          </Text>
+          <Text>ke {Info.Title}</Text>
         </Detail>
         <Detail>
           <OurName>{Info.FN.Main}</OurName>
