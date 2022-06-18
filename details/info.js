@@ -28,7 +28,7 @@ export const Info = {
   },
   Extra: {
     Title: "Atucara Majlis",
-    Line1: "Jamuan Makan: 12:00 PM - 4:00 PM",
+    Line1: "Jamuan Makan: 12:00 PM - 6:00 PM",
     Line2: "Ketibaan Pengantin: 1:30 PM",
   },
   Contact: [
